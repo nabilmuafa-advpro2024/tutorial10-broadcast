@@ -11,3 +11,9 @@ Pada gambar ini, kiri atas adalah server sementara yang lainnya adalah client. U
 ![alt text](image-1.png)
 
 Setelah port diubah, broadcast chat masih berjalan seperti biasa. Bedanya, disini kita meminta secara eksplisit untuk server agar listen pada port 8080. Untuk memastikan bahwa broadcast masih bisa berjalan, maka kedua websocket, baik dari sisi client maupun server, harus berjalan pada port yang sama. Jika portnya berbeda, maka kedua sisi tidak akan bisa berkomunikasi dan tidak bisa saling berkoneksi. Dalam hal ini, karena kita punya `client.rs` dan `server.rs`, kita perlu mengganti port pada kedua websocket yang didefinisikan pada file tersebut. Kedua websocket terlihat menggunakan protokol yang sama, yaitu TCP.
+
+# 2.3 Small changes, add IP and Port
+
+![alt text](image-2.png)
+
+Pertama untuk server, saya memodifikasi bagian "New connection from..." dan menambahkan nama saya disitu. Saya mengubahnya disana karena bagian itu secara spesifik mencetak string. Setelah itu, saya memodifikasi fungsi `handle_connection`, spesifiknya di bagian yang mengirimkan pesan melalui `bcast_tx`. Pada bagian tersebut, saya mengubah string yang dikirim jadi formatted string yang mengadung address pengirimnya juga. Dengan itu, string yang diterima client sudah termasuk IP address dari client. Pada file client sendiri, saya hanya mengubah bagian string "From server: ..." dengan menambahkan nama saya.
